@@ -1,93 +1,112 @@
-import { ArrowUpRight, Github, Linkedin, Mail, Phone, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import GlassCard from './ui/GlassCard';
 
 const ContactSection = () => {
-  const contactLinks = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'faatehsultan@gmail.com',
-      href: 'mailto:faatehsultan@gmail.com',
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+92 336 452 3139',
-      href: 'tel:+923364523139',
-    },
-    {
-      icon: Github,
-      label: 'GitHub',
-      value: 'faatehsultan',
-      href: 'https://github.com/faatehsultan',
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      value: 'faatehsultankazmi',
-      href: 'https://linkedin.com/in/faatehsultankazmi',
-    },
-  ];
-
   return (
-    <section id="contact" className="relative py-32 px-6">
-      {/* Background accents */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-2/3 h-1/2 bg-gradient-radial from-primary/10 to-transparent blur-3xl" />
+    <section id="contact" className="relative py-32 px-6 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
+      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 w-full h-1/2 bg-gradient-radial from-primary/20 to-transparent blur-3xl" />
+      
+      {/* Animated grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,240,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,240,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
 
       <div className="relative max-w-4xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-mono text-primary mb-6">
-            <Send className="w-4 h-4" />
-            Get In Touch
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="text-foreground">Let's </span>
-            <span className="text-gradient">Connect</span>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4">
+            <span className="text-gradient glow-text">LET'S BUILD.</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Got a project idea? Want to collaborate on something cool? 
-            Or just want to chat about AI and tech? Hit me up!
+          <p className="text-lg text-muted-foreground">
+            Ready to synthesize something extraordinary?
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {contactLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group relative p-6 rounded-2xl glass hover:bg-card/60 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
-                  <link.icon className="w-6 h-6" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-muted-foreground mb-1">{link.label}</p>
-                  <p className="font-medium text-foreground truncate group-hover:text-primary transition-colors">
-                    {link.value}
-                  </p>
-                </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <a
+        {/* Contact Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid md:grid-cols-3 gap-4 mb-12"
+        >
+          {/* Email - Featured */}
+          <a 
             href="mailto:faatehsultan@gmail.com"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all duration-300 glow-box hover:scale-105"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:col-span-3"
           >
-            <Mail className="w-5 h-5" />
-            Let's Build Something Amazing
-            <ArrowUpRight className="w-5 h-5" />
+            <GlassCard className="p-8 flex flex-col items-center gap-4 border-primary/20 group cursor-pointer">
+              <div className="p-4 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <Mail className="w-8 h-8 text-primary" />
+              </div>
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                Email Protocol
+              </span>
+              <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                faatehsultan@gmail.com
+                <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+              </span>
+            </GlassCard>
           </a>
-        </div>
+
+          {/* LinkedIn */}
+          <a 
+            href="https://linkedin.com/in/faatehsultankazmi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:col-span-1"
+          >
+            <GlassCard className="p-6 flex flex-col items-center gap-3 group cursor-pointer h-full">
+              <Linkedin className="w-6 h-6 text-blue-400 group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+                Professional Log
+              </span>
+              <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                faatehsultankazmi
+              </span>
+            </GlassCard>
+          </a>
+
+          {/* GitHub */}
+          <a 
+            href="https://github.com/faatehsultan"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:col-span-2"
+          >
+            <GlassCard className="p-6 flex flex-col items-center gap-3 group cursor-pointer h-full">
+              <Github className="w-6 h-6 text-foreground group-hover:scale-110 transition-transform" />
+              <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+                Public Repository
+              </span>
+              <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                github.com/faatehsultan
+              </span>
+            </GlassCard>
+          </a>
+        </motion.div>
+
+        {/* Location & Status */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center space-y-4"
+        >
+          <p className="text-sm text-muted-foreground">
+            Based in <span className="text-foreground font-medium">Lahore</span>, shipping worldwide 🌍
+          </p>
+        </motion.div>
       </div>
     </section>
   );
