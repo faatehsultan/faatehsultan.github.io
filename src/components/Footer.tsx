@@ -1,27 +1,36 @@
-import { Heart, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative py-12 px-6 border-t border-border/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <footer className="relative py-12 px-6 border-t border-border/30">
+      {/* Subtle gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
+      
+      <div className="relative max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6"
+        >
           {/* Logo & Copyright */}
-          <div className="flex items-center gap-3">
-            <span className="text-xl font-bold text-gradient">FS<span className="text-primary">.</span></span>
-            <span className="text-muted-foreground text-sm">
-              © {currentYear} Faateh Sultan
-            </span>
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center font-black text-primary-foreground">
+              F
+            </div>
+            <div>
+              <span className="text-sm font-bold text-foreground">FAATEH.SULTAN</span>
+              <span className="text-xs text-muted-foreground block">© {currentYear}</span>
+            </div>
           </div>
 
-          {/* Built with */}
+          {/* Built with AI */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>Built with</span>
-            <Heart className="w-4 h-4 text-primary animate-pulse" />
-            <span>&</span>
-            <Sparkles className="w-4 h-4 text-accent" />
-            <span>using AI</span>
+            <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+            <span>Synthesized by AI</span>
           </div>
 
           {/* Status */}
@@ -32,7 +41,7 @@ const Footer = () => {
             </span>
             <span className="text-sm text-muted-foreground">Open to opportunities</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

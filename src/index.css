@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,41 +6,41 @@
 
 @layer base {
   :root {
-    --background: 220 20% 4%;
+    --background: 0 0% 2%;
     --foreground: 180 100% 98%;
 
-    --card: 220 20% 8%;
+    --card: 0 0% 5%;
     --card-foreground: 180 100% 98%;
 
-    --popover: 220 20% 6%;
+    --popover: 0 0% 4%;
     --popover-foreground: 180 100% 98%;
 
-    --primary: 175 100% 50%;
-    --primary-foreground: 220 20% 4%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 220 20% 12%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 180 100% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 280 100% 65%;
+    --accent: 270 100% 50%;
     --accent-foreground: 180 100% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 20% 18%;
-    --input: 220 20% 15%;
-    --ring: 175 100% 50%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 180 100% 50%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
-    --glow-primary: 175 100% 50%;
-    --glow-accent: 280 100% 65%;
-    --gradient-start: 175 100% 50%;
-    --gradient-end: 280 100% 65%;
+    --glow-primary: 180 100% 50%;
+    --glow-accent: 270 100% 50%;
+    --gradient-start: 180 100% 50%;
+    --gradient-end: 270 100% 50%;
   }
 }
 
@@ -69,19 +69,19 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.5),
-                 0 0 40px hsl(var(--primary) / 0.3),
-                 0 0 60px hsl(var(--primary) / 0.1);
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.6),
+                 0 0 60px hsl(var(--primary) / 0.4),
+                 0 0 90px hsl(var(--primary) / 0.2);
   }
 
   .glow-box {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.2),
-                0 0 40px hsl(var(--primary) / 0.1),
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.3),
+                0 0 60px hsl(var(--primary) / 0.15),
                 inset 0 1px 0 hsl(var(--primary) / 0.1);
   }
 
   .glass {
-    @apply bg-card/40 backdrop-blur-xl border border-border/50;
+    @apply bg-card/40 backdrop-blur-2xl border border-border/30;
   }
 
   .gradient-border {
@@ -130,12 +130,12 @@
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
-                0 0 40px hsl(var(--primary) / 0.1);
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.3),
+                0 0 60px hsl(var(--primary) / 0.15);
   }
   50% {
-    box-shadow: 0 0 30px hsl(var(--primary) / 0.5),
-                0 0 60px hsl(var(--primary) / 0.2);
+    box-shadow: 0 0 50px hsl(var(--primary) / 0.5),
+                0 0 100px hsl(var(--primary) / 0.25);
   }
 }
 
@@ -173,44 +173,12 @@
   }
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes particle-float {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
   }
   100% {
-    transform: translate(var(--tx), var(--ty)) rotate(360deg);
-    opacity: 0;
+    background-position: 200% 0;
   }
 }
 
@@ -227,13 +195,13 @@
   animation: gradient-shift 8s ease infinite;
 }
 
-.animate-rotate {
-  animation: rotate 20s linear infinite;
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
 }
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -242,7 +210,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary) / 0.3);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

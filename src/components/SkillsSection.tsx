@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Code2, Database, Cloud, Bot, Layers, Terminal } from 'lucide-react';
+import GlassCard from './ui/GlassCard';
 
 interface Skill {
   name: string;
@@ -86,25 +88,36 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="relative py-32 px-6">
+    <section id="skills" className="relative py-32 px-6 overflow-hidden">
       {/* Background accent */}
       <div className="absolute right-0 top-1/4 w-1/3 h-1/2 bg-gradient-to-l from-accent/5 to-transparent blur-3xl" />
 
-      <div className="relative max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-mono text-primary mb-6">
-            <Terminal className="w-4 h-4" />
-            Tech Stack
+      <div className="relative max-w-5xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-primary mb-4 block">
+            03_Tech Stack
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="text-foreground">Skills & </span>
-            <span className="text-gradient">Technologies</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black">
+            <span className="text-foreground">SKILLS & </span>
+            <span className="text-gradient glow-text">TECH.</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
           {categories.map((category, index) => (
             <button
               key={category.title}
@@ -119,49 +132,68 @@ const SkillsSection = () => {
               <span className="hidden sm:inline">{category.title}</span>
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Skills Display */}
-        <div className="max-w-2xl mx-auto">
-          <div className="p-8 rounded-2xl glass">
-            <div className="flex items-center gap-3 mb-8">
-              {(() => {
-                const Icon = categories[activeCategory].icon;
-                return <Icon className="w-6 h-6 text-primary" />;
-              })()}
-              <h3 className="text-2xl font-semibold text-foreground">
-                {categories[activeCategory].title}
-              </h3>
-            </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <GlassCard className="p-8 max-w-2xl mx-auto" hover={false}>
+              <div className="flex items-center gap-3 mb-8">
+                {(() => {
+                  const Icon = categories[activeCategory].icon;
+                  return <Icon className="w-6 h-6 text-primary" />;
+                })()}
+                <h3 className="text-2xl font-bold text-foreground">
+                  {categories[activeCategory].title}
+                </h3>
+              </div>
 
-            <div className="space-y-6">
-              {categories[activeCategory].skills.map((skill, index) => (
-                <div key={skill.name} className="group">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      {skill.name}
-                    </span>
-                    <span className="text-sm font-mono text-muted-foreground">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className="h-2 rounded-full bg-muted overflow-hidden">
-                    <div
-                      className={`h-full rounded-full bg-gradient-to-r ${categories[activeCategory].color} transition-all duration-1000 ease-out`}
-                      style={{
-                        width: `${skill.level}%`,
-                        animationDelay: `${index * 0.1}s`,
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+              <div className="space-y-6">
+                {categories[activeCategory].skills.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="group"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                        {skill.name}
+                      </span>
+                      <span className="text-sm font-mono text-muted-foreground">
+                        {skill.level}%
+                      </span>
+                    </div>
+                    <div className="h-2 rounded-full bg-muted overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
+                        className={`h-full rounded-full bg-gradient-to-r ${categories[activeCategory].color}`}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </GlassCard>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Quick Tech Tags */}
-        <div className="mt-16 flex flex-wrap justify-center gap-3">
+        {/* Quick Tags */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 flex flex-wrap justify-center gap-3"
+        >
           {['MERN Stack', 'AI Agents', 'Microservices', 'Real-time Systems', 'Cloud Native', 'Gen-AI'].map(
             (tag) => (
               <span
@@ -172,7 +204,7 @@ const SkillsSection = () => {
               </span>
             )
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
